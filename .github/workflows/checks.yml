@@ -4,7 +4,7 @@ permissions:
   contents: read
 jobs:
   python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python: ['3.12', '3.13', '3.14']
@@ -19,7 +19,7 @@ jobs:
       - run: python tools/build_release.py
       - run: bash -n collector/install-debian.sh
   card:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
