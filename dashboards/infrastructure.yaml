@@ -1,0 +1,8 @@
+# Add this item to your dashboard's views list.
+title: Infrastructure
+path: infrastructure
+icon: mdi:lan
+type: panel
+cards:
+  - type: custom:infra-vcenter-overview
+    hours_to_show: 24

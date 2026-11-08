@@ -1,0 +1,68 @@
+{
+  "title": "Infrastructure vCenter",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect VMware",
+        "description": "vCenter is optional. Without vCenter, enter direct ESXi addresses separated by ;. With vCenter, the list filters its hosts (empty = all). Use a read-only account and addresses without protocol or path.",
+        "data": {
+          "host": "vCenter address (optional)",
+          "esx_hosts": "ESXi addresses separated by ; (optional with vCenter)",
+          "username": "Username",
+          "password": "Password",
+          "port": "HTTPS port",
+          "verify_ssl": "Verify TLS certificate",
+          "interval": "Collection interval (seconds)"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Update VMware credentials",
+        "data": {
+          "username": "Username",
+          "password": "Password"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure VMware",
+        "description": "vCenter is optional. Without vCenter, enter direct ESXi addresses separated by ;. With vCenter, the list filters its hosts (empty = all). Use a read-only account and addresses without protocol or path.",
+        "data": {
+          "host": "vCenter address (optional)",
+          "esx_hosts": "ESXi addresses separated by ; (optional with vCenter)",
+          "username": "Username",
+          "password": "Password",
+          "port": "HTTPS port",
+          "verify_ssl": "Verify TLS certificate",
+          "interval": "Collection interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "The VMware server rejected these credentials.",
+      "cannot_connect": "Connection failed: {details}. Look for VCENTER_CONNECT in the log.",
+      "invalid_certificate": "Untrusted certificate or server name mismatch: {details}.",
+      "tls_error": "TLS negotiation failed: {details}.",
+      "dns_error": "Home Assistant cannot resolve the server name: {details}.",
+      "timeout": "Network timeout. Check routing and HTTPS port: {details}.",
+      "connection_refused": "Connection refused. Check the address and HTTPS service: {details}.",
+      "no_permission": "This account cannot access the required data: {details}.",
+      "wrong_endpoint": "Server type does not match the selected mode: {details}.",
+      "host_selection": "A selected ESXi is absent or hidden from this account: {details}."
+    },
+    "abort": {
+      "already_configured": "This VMware source is already configured.",
+      "reauth_successful": "Credentials updated.",
+      "unique_id_mismatch": "The server identity does not match the original source.",
+      "reconfigure_successful": "Connection updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Collection interval",
+        "data": {
+          "interval": "Interval in seconds"
+        }
+      }
+    }
+  }
+}

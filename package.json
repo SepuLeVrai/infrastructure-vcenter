@@ -1,0 +1,12 @@
+{
+  "name": "infrastructure-vcenter",
+  "version": "0.4.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Development tests for the local Home Assistant infrastructure card",
+  "scripts": {
+    "test": "node tests/test_dashboard.cjs && node tests/test_source_fusion.cjs",
+    "test:browser": "node tests/test_dashboard_browser.cjs && node tests/test_unified_browser.cjs && node tests/test_worker_browser.cjs"
+  },
+  "devDependencies": {"playwright": "1.56.1"}
+}

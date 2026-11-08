@@ -1,0 +1,10 @@
+# Configuration d’UNE VUE à ajouter à l’Aperçu existant.
+# Ne pas remplacer toute la configuration de l’Aperçu par ce fichier.
+title: Infrastructure
+path: infrastructure
+icon: mdi:server-network
+type: panel
+cards:
+  - type: custom:infra-vcenter-overview
+    title: Infrastructure
+    hours_to_show: 24

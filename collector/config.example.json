@@ -1,0 +1,32 @@
+{
+  "agent_id": "example",
+  "interval": 60,
+  "mqtt": {
+    "host": "mqtt.example.invalid",
+    "port": 1883,
+    "username": "infra-monitor",
+    "password_env": "INFRA_MQTT_PASSWORD",
+    "tls": false
+  },
+  "sources": [
+    {
+      "id": "linux-node1",
+      "type": "linux",
+      "name": "LINUX-NODE-01",
+      "mounts": [
+        "/"
+      ],
+      "interfaces": []
+    },
+    {
+      "id": "bmc-node1",
+      "type": "ipmi",
+      "name": "BMC node 1",
+      "model": "PowerEdge R610",
+      "host": "192.0.2.21",
+      "username": "monitor",
+      "password_env": "INFRA_BMC_NODE1_PASSWORD",
+      "cipher_suite": 3
+    }
+  ]
+}

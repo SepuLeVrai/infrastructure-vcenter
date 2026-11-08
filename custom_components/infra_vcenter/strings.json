@@ -1,0 +1,68 @@
+{
+  "title": "Infrastructure vCenter",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connecter vCenter ou des ESXi",
+        "description": "vCenter est facultatif. Sans vCenter, saisir les ESXi séparés par des ;. Avec vCenter, cette liste filtre les hôtes supervisés (vide = tous). Compte en lecture seule, adresses sans protocole ni chemin.",
+        "data": {
+          "host": "Adresse vCenter (facultatif)",
+          "esx_hosts": "Adresses ESXi séparées par des ; (facultatif avec vCenter)",
+          "username": "Utilisateur",
+          "password": "Mot de passe",
+          "port": "Port HTTPS",
+          "verify_ssl": "Vérifier le certificat TLS",
+          "interval": "Intervalle de collecte (secondes)"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Actualiser les identifiants VMware",
+        "data": {
+          "username": "Utilisateur",
+          "password": "Mot de passe"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigurer VMware",
+        "description": "vCenter est facultatif. Sans vCenter, saisir les ESXi séparés par des ;. Avec vCenter, cette liste filtre les hôtes supervisés (vide = tous). Compte en lecture seule, adresses sans protocole ni chemin.",
+        "data": {
+          "host": "Adresse vCenter (facultatif)",
+          "esx_hosts": "Adresses ESXi séparées par des ; (facultatif avec vCenter)",
+          "username": "Utilisateur",
+          "password": "Mot de passe",
+          "port": "Port HTTPS",
+          "verify_ssl": "Vérifier le certificat TLS",
+          "interval": "Intervalle de collecte (secondes)"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Identifiants refusés par le serveur VMware.",
+      "cannot_connect": "Échec de connexion : {details}. Le journal contient une ligne VCENTER_CONNECT.",
+      "invalid_certificate": "Certificat TLS non reconnu ou nom du serveur incorrect : {details}.",
+      "tls_error": "Échec de la négociation TLS avec vCenter : {details}.",
+      "dns_error": "Le nom du vCenter ne peut pas être résolu depuis Home Assistant. Essayez son adresse IP : {details}.",
+      "timeout": "vCenter ne répond pas dans le délai réseau. Vérifiez le routage et le port HTTPS : {details}.",
+      "connection_refused": "Le serveur refuse la connexion sur ce port. Vérifiez l’adresse du vCenter et son service HTTPS : {details}.",
+      "no_permission": "Le compte est connecté mais n’a pas les droits nécessaires : {details}.",
+      "wrong_endpoint": "Type de serveur incorrect pour le mode choisi : {details}.",
+      "host_selection": "Un ESXi sélectionné est absent de l’inventaire ou invisible avec ce compte : {details}."
+    },
+    "abort": {
+      "already_configured": "Cette source VMware est déjà configurée.",
+      "reauth_successful": "Identifiants mis à jour.",
+      "unique_id_mismatch": "Le serveur ne correspond pas à la source VMware initiale.",
+      "reconfigure_successful": "Connexion mise à jour."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Intervalle de collecte",
+        "data": {
+          "interval": "Intervalle en secondes"
+        }
+      }
+    }
+  }
+}

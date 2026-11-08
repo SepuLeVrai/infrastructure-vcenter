@@ -1,0 +1,21 @@
+[Unit]
+Description=Infrastructure Linux and iDRAC MQTT collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=infra-agent
+Group=infra-agent
+WorkingDirectory=/opt/infra-agent
+EnvironmentFile=/etc/infra-agent/secrets.env
+ExecStart=/usr/bin/python3 /opt/infra-agent/bridge.py /etc/infra-agent/config.json
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=45
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

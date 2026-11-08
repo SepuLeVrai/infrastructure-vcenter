@@ -1,0 +1,17 @@
+.dev-deps/
+__pycache__/
+*.pyc
+dist/
+.venv/
+collector/config.json
+collector/secrets.env
+node_modules/
+.dev-node/
+config.json
+*.generated.json
+.env
+secrets.env
+*.key
+*.pem
+id_ed25519*
+tests/artifacts/
