@@ -1,12 +1,12 @@
 # Vue Infrastructure
 
-Copier www/infra-vcenter vers /config/www/infra-vcenter. Dans les ressources du tableau de bord (profil en mode avancÃ© si nÃ©cessaire), ajouter **Module JavaScript** :
+Copier www/infra-vcenter vers /config/www/infra-vcenter. Dans les ressources du tableau de bord (profil en mode avancé si nécessaire), ajouter **Module JavaScript** :
 
 `/local/infra-vcenter/infrastructure-card.js?v=0.4.0`
 
-Actualiser le navigateur. Aucun plugin graphique supplÃ©mentaire requis.
+Actualiser le navigateur. Aucun plugin graphique supplémentaire requis.
 
-## CrÃ©er la vue
+## Créer la vue
 
 Ajouter une vue **Panneau (carte unique)**, puis une carte manuelle :
 
@@ -15,7 +15,7 @@ type: custom:infra-vcenter-overview
 hours_to_show: 24
 ```
 
-Le type personnalisÃ© appartient Ã  la **carte**, pas Ã  la vue. Dans la configuration complÃ¨te d'un tableau de bord, ajouter cet Ã©lÃ©ment Ã  la liste views :
+Le type personnalisé appartient à la **carte**, pas à la vue. Dans la configuration complète d'un tableau de bord, ajouter cet élément à la liste views :
 
 ```yaml
 title: Infrastructure
@@ -31,17 +31,17 @@ Ne remplacer pas tout le tableau de bord par cet extrait.
 
 ## Noms, rattachements et puissance
 
-**Modifier le tableau de bord â†’ Modifier la carte** ouvre l'Ã©diteur de la carte : noms personnalisÃ©s, rattachements IPMI et capteurs de puissance. La fenÃªtre **Configuration de la vue** ne rÃ¨gle pas ces paramÃ¨tres.
+**Modifier le tableau de bord → Modifier la carte** ouvre l'éditeur de la carte : noms personnalisés, rattachements IPMI et capteurs de puissance. La fenêtre **Configuration de la vue** ne règle pas ces paramètres.
 
-Rattacher chaque iDRAC/BMC MQTT Ã  son serveur. Une source matÃ©rielle ne doit appartenir qu'Ã  une machine. VMware fournit les usages CPU/RAM, IPMI est prioritaire pour le matÃ©riel. Une mÃªme mesure reconnue n'est affichÃ©e qu'une fois ; des sondes non identifiÃ©es comme Ã©quivalentes restent distinctes. Les entitÃ©s et historiques d'origine sont conservÃ©s.
+Rattacher chaque iDRAC/BMC MQTT à son serveur. Une source matérielle ne doit appartenir qu'à une machine. VMware fournit les usages CPU/RAM, IPMI est prioritaire pour le matériel. Une même mesure reconnue n'est affichée qu'une fois ; des sondes non identifiées comme équivalentes restent distinctes. Les entités et historiques d'origine sont conservés.
 
-Le nom DNS ESXi est affichÃ© automatiquement ; un nom personnalisÃ© prend la prioritÃ©. L'IP reste disponible comme contexte.
+Le nom DNS ESXi est affiché automatiquement ; un nom personnalisé prend la priorité. L'IP reste disponible comme contexte.
 
-Pour une prise, sÃ©lectionner le capteur de **puissance instantanÃ©e en W**, pas l'Ã©nergie en kWh. Le total additionne une mesure par machine et indique une couverture partielle si nÃ©cessaire. Une prise alimentant plusieurs serveurs ne doit pas Ãªtre rattachÃ©e Ã  chacun.
+Pour une prise, sélectionner le capteur de **puissance instantanée en W**, pas l'énergie en kWh. Le total additionne une mesure par machine et indique une couverture partielle si nécessaire. Une prise alimentant plusieurs serveurs ne doit pas être rattachée à chacun.
 
 ## Structure YAML fictive
 
-L'Ã©diteur choisit les identifiants rÃ©els ; les clÃ©s ci-dessous ne sont pas des IP :
+L'éditeur choisit les identifiants réels ; les clés ci-dessous ne sont pas des IP :
 
 ```yaml
 type: custom:infra-vcenter-overview
@@ -56,6 +56,6 @@ metric_overrides:
     power_w: sensor.example_plug_power
 ```
 
-En mode direct les clÃ©s comportent l'identitÃ© ESXi. Utiliser l'Ã©diteur Ã©vite les erreurs.
+En mode direct les clés comportent l'identité ESXi. Utiliser l'éditeur évite les erreurs.
 
-Les graphiques dÃ©pendent de Recorder. Autoriser les entitÃ©s si vous utilisez une liste d'inclusion. Aucun historique n'est importÃ© de vCenter. Les boutons 6 h / 24 h / 7 j ne crÃ©ent pas de donnÃ©es antÃ©rieures Ã  l'installation.
+Les graphiques dépendent de Recorder. Autoriser les entités si vous utilisez une liste d'inclusion. Aucun historique n'est importé de vCenter. Les boutons 6 h / 24 h / 7 j ne créent pas de données antérieures à l'installation.

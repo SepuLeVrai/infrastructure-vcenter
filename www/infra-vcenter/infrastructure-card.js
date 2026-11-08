@@ -1,4 +1,4 @@
-/* Infrastructure vCenter 0.4.0 — local Lovelace card, no external dependencies. */
+/* Infrastructure vCenter 0.4.0 - local Lovelace card, no external dependencies. */
 (() => {
   const TAG = "infra-vcenter-overview";
   const TEXT = { poweredOn: "Allumée", poweredOff: "Éteinte", suspended: "Suspendue",
@@ -253,7 +253,7 @@
       }
       const label = document.createElementNS(svg.namespaceURI, "text");
       for (const [key, val] of Object.entries({x:100,y:94,"text-anchor":"middle",fill:"var(--primary-text-color)","font-size":30,"font-weight":650})) label.setAttribute(key, val);
-      label.textContent = percent === null ? "—" : `${percent.toLocaleString("fr-FR", {maximumFractionDigits:1})} %`;
+      label.textContent = percent === null ? "-" : `${percent.toLocaleString("fr-FR", {maximumFractionDigits:1})} %`;
       svg.append(label); button.append(svg);
       const capacity = store.metrics.capacity, free = store.metrics.free;
       if (!missing(capacity) && !missing(free)) {
@@ -299,7 +299,7 @@
         const detail = node("details", "vm-detail"); detail.append(node("summary", "", "vSwitch standards · topologie et uplinks"));
         for (const sw of switches) {
           const uplinks = (sw.uplink_keys || []).map(key => [...nics.values()].find(n => n.key === key)?.device || key);
-          detail.append(node("p", "hint", `${sw.name} · ${uplinks.join(", ") || "aucun uplink physique"} · MTU ${sw.mtu || "—"}`));
+          detail.append(node("p", "hint", `${sw.name} · ${uplinks.join(", ") || "aucun uplink physique"} · MTU ${sw.mtu || "-"}`));
         }
         detail.append(node("p", "hint", "Les débits affichés sont ceux des cartes physiques. Ils ne mesurent pas tout le trafic interne d’un vSwitch entre VM du même hôte."));
         parent.append(detail);
@@ -417,7 +417,7 @@
       const direct=resource.attrs.api_type==="HostAgentGroup";
       const box = node("section", "panel global");
       box.append(node("div", "eyebrow", direct?"ESXi · ACCÈS DIRECT":"VCENTER · GLOBAL"), node("h2", "", "Vue d’ensemble"));
-      box.append(node("p", "hint", direct ? "Supervision directe des hyperviseurs, sans vCenter." : `vSphere ${resource.attrs.version || "—"} · build ${resource.attrs.build || "—"} · API ${resource.attrs.api_version || "—"}${resource.attrs.scope==="selected_hosts"?" · périmètre ESXi sélectionnés":""}`));
+      box.append(node("p", "hint", direct ? "Supervision directe des hyperviseurs, sans vCenter." : `vSphere ${resource.attrs.version || "-"} · build ${resource.attrs.build || "-"} · API ${resource.attrs.api_version || "-"}${resource.attrs.scope==="selected_hosts"?" · périmètre ESXi sélectionnés":""}`));
       const metrics = node("div", "metrics");
       for (const key of ["hosts", "hosts_connected", "vms", "vms_on", "datastores", ...(direct?[]:["storage_capacity", "storage_free"])])
         metrics.append(this.measure(resource, key,direct&&key==="datastores"?"Datastores vus par hôte":undefined));
@@ -564,7 +564,7 @@
       const titles = node("div");
       const name=displayName(host,this.config);
       titles.append(node("div", "eyebrow", "HYPERVISEUR ESXI"), node("h2", "", name),
-        node("p", "hint", `${host.attrs.model || "Serveur"} · ESXi ${host.attrs.esxi_version || "—"}${name!==host.name ? " · "+host.name : ""} · ${vms.length} VM rattachées`));
+        node("p", "hint", `${host.attrs.model || "Serveur"} · ESXi ${host.attrs.esxi_version || "-"}${name!==host.name ? " · "+host.name : ""} · ${vms.length} VM rattachées`));
       const badges = node("div", "badges");
       badges.append(this.badge(host.metrics.connection));
       if (host.metrics.health) badges.append(this.badge(host.metrics.health));
@@ -653,7 +653,7 @@
         btn.setAttribute("aria-label", `${vm.name} · afficher les détails`);
         btn.onclick = () => choose(vm); toggles.set(vm.key, btn); name.append(btn); tr.append(name);
         for (const metric of ["power_state", "cpu_mhz", "ram_host", "net_rx", "net_tx", "storage_committed", "snapshots"]) {
-          const cell = node("td"); const action = node("button", "cell", missing(vm.metrics[metric]) ? "—" : this.format(vm.metrics[metric]));
+          const cell = node("td"); const action = node("button", "cell", missing(vm.metrics[metric]) ? "-" : this.format(vm.metrics[metric]));
           action.title = this.format(vm.metrics[metric]);
           if (metric === "power_state") action.classList.add(vm.metrics[metric]?.state === "poweredOn" ? "state-on" : "state-off");
           if (metric === "snapshots" && Number(vm.metrics[metric]?.state) > 0) action.classList.add("snapshot-present");

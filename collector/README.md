@@ -4,7 +4,7 @@ Le collecteur publie via MQTT Discovery : machine locale, Linux distants par SSH
 
 ## Installation Debian 13
 
-Depuis le rÃ©pertoire collector :
+Depuis le répertoire collector :
 
 ```bash
 sudo bash install-debian.sh
@@ -12,9 +12,9 @@ sudo nano /etc/infra-agent/config.json
 sudo nano /etc/infra-agent/secrets.env
 ```
 
-L'installateur ajoute Python, Paho MQTT, lm-sensors, ipmitool et SSH, crÃ©e le compte systÃ¨me infra-agent et prÃ©serve la configuration existante. Il ne dÃ©marre pas le service.
+L'installateur ajoute Python, Paho MQTT, lm-sensors, ipmitool et SSH, crée le compte système infra-agent et préserve la configuration existante. Il ne démarre pas le service.
 
-Remplacer le broker et les BMC fictifs, supprimer les sources inutilisÃ©es. Une source linux lit la machine locale sans adresse IP. interfaces: [] choisit les interfaces physiques ; mounts sÃ©lectionne les volumes.
+Remplacer le broker et les BMC fictifs, supprimer les sources inutilisées. Une source linux lit la machine locale sans adresse IP. interfaces: [] choisit les interfaces physiques ; mounts sélectionne les volumes.
 
 Mots de passe dans le fichier local secrets.env :
 
@@ -23,7 +23,7 @@ INFRA_MQTT_PASSWORD="remplacer-localement"
 INFRA_BMC_NODE1_PASSWORD="remplacer-localement"
 ```
 
-Dans JSON, password_env contient le **nom** de variable, jamais sa valeur. Les guillemets servent notamment aux espaces ; ils ne corrigent pas une rÃ©fÃ©rence erronÃ©e. Le fichier est lu par systemd et n'est pas un script shell.
+Dans JSON, password_env contient le **nom** de variable, jamais sa valeur. Les guillemets servent notamment aux espaces ; ils ne corrigent pas une référence erronée. Le fichier est lu par systemd et n'est pas un script shell.
 
 ## Assistant Linux distant
 
@@ -31,18 +31,18 @@ Dans JSON, password_env contient le **nom** de variable, jamais sa valeur. Les g
 python3 configure.py
 ```
 
-Il demande les adresses sÃ©parÃ©es par des points-virgules, la collecte locale et le broker, puis crÃ©e config.generated.json sans Ã©craser de fichier. Sans interaction :
+Il demande les adresses séparées par des points-virgules, la collecte locale et le broker, puis crée config.generated.json sans écraser de fichier. Sans interaction :
 
 ```bash
 python3 configure.py --local --linux-hosts '192.0.2.31;192.0.2.32' \
   --mqtt-host mqtt.example.invalid --ssh-user monitor
 ```
 
-Relire avant copie vers /etc/infra-agent/config.json. PrÃ©server les agent_id, identifiants de sources et sources IPMI existants.
+Relire avant copie vers /etc/infra-agent/config.json. Préserver les agent_id, identifiants de sources et sources IPMI existants.
 
-### PrÃ©parer SSH
+### Préparer SSH
 
-Chaque serveur distant doit avoir python3, un compte dÃ©diÃ© sans sudo autorisÃ© par clÃ© et accÃ¨s en lecture Ã  /proc, aux compteurs rÃ©seau et aux volumes choisis. lm-sensors est facultatif pour les tempÃ©ratures. Aucun service distant n'est installÃ© ; un programme de lecture est exÃ©cutÃ© en mÃ©moire.
+Chaque serveur distant doit avoir python3, un compte dédié sans sudo autorisé par clé et accès en lecture à /proc, aux compteurs réseau et aux volumes choisis. lm-sensors est facultatif pour les températures. Aucun service distant n'est installé ; un programme de lecture est exécuté en mémoire.
 
 Sur le collecteur :
 
@@ -51,9 +51,9 @@ sudo install -d -o infra-agent -g infra-agent -m 0700 /etc/infra-agent/ssh
 sudo -u infra-agent ssh-keygen -t ed25519 -N '' -f /etc/infra-agent/ssh/id_ed25519
 ```
 
-Installer la clÃ© .pub dans ~monitor/.ssh/authorized_keys du serveur distant ; prÃ©fÃ©rer les restrictions restrict et adresse source lorsque possible.
+Installer la clé .pub dans ~monitor/.ssh/authorized_keys du serveur distant ; préférer les restrictions restrict et adresse source lorsque possible.
 
-Obtenir et **vÃ©rifier l'empreinte de la clÃ© hÃ´te par un canal de confiance**, puis ajouter la clÃ© Ã  /etc/infra-agent/ssh/known_hosts. ssh-keyscan seul n'authentifie pas une clÃ©. Tester :
+Obtenir et **vérifier l'empreinte de la clé hôte par un canal de confiance**, puis ajouter la clé à /etc/infra-agent/ssh/known_hosts. ssh-keyscan seul n'authentifie pas une clé. Tester :
 
 ```bash
 sudo -u infra-agent ssh -T -o BatchMode=yes -o StrictHostKeyChecking=yes \
@@ -67,11 +67,11 @@ Source distante :
 {"id":"linux-node1","type":"ssh_linux","host":"192.0.2.31","username":"monitor","private_key_file":"/etc/infra-agent/ssh/id_ed25519","known_hosts_file":"/etc/infra-agent/ssh/known_hosts","mounts":["/"]}
 ```
 
-Le nom remonte du serveur sauf si name est renseignÃ©. Le temps de collecte s'ajoute Ã  l'intervalle ; adapter le nombre de sources et la frÃ©quence.
+Le nom remonte du serveur sauf si name est renseigné. Le temps de collecte s'ajoute à l'intervalle ; adapter le nombre de sources et la fréquence.
 
 ## iDRAC6 / IPMI
 
-Activer IPMI sur le LAN, autoriser le compte IPMI au niveau USER et permettre UDP 623 depuis le collecteur. Les identifiants sont indÃ©pendants de VMware. Tester avec le vrai compte, sans mot de passe dans la commande :
+Activer IPMI sur le LAN, autoriser le compte IPMI au niveau USER et permettre UDP 623 depuis le collecteur. Les identifiants sont indépendants de VMware. Tester avec le vrai compte, sans mot de passe dans la commande :
 
 ```bash
 read -rp 'Utilisateur IPMI : ' infra_bmc_user
@@ -80,9 +80,9 @@ ipmitool -I lanplus -C 3 -H 192.0.2.21 -U "$infra_bmc_user" -a -L USER sensor
 ipmitool -I lanplus -C 3 -H 192.0.2.21 -U "$infra_bmc_user" -a -L USER dcmi power reading
 ```
 
-cipher_suite: 3 vise iDRAC6 ; choisir le profil supportÃ© par votre matÃ©riel (17 possible sur BMC rÃ©cents). DCMI n'est pas universel : son absence laisse les autres sondes utilisables. Puissance = lecture instantanÃ©e DCMI ou sonde systÃ¨me reconnue, jamais addition des alimentations.
+cipher_suite: 3 vise iDRAC6 ; choisir le profil supporté par votre matériel (17 possible sur BMC récents). DCMI n'est pas universel : son absence laisse les autres sondes utilisables. Puissance = lecture instantanée DCMI ou sonde système reconnue, jamais addition des alimentations.
 
-## VÃ©rifier et dÃ©marrer
+## Vérifier et démarrer
 
 ```bash
 sudo /usr/bin/python3 /opt/infra-agent/bridge.py /etc/infra-agent/config.json --check
@@ -93,7 +93,7 @@ sudo systemd-run --wait --pipe --collect \
   /usr/bin/python3 /opt/infra-agent/bridge.py /etc/infra-agent/config.json --once
 ```
 
---check valide sans connexion. --once lit sans publier sur MQTT ; le premier CPU/rÃ©seau local peut Ãªtre null car deux observations sont nÃ©cessaires. Retirer les informations privÃ©es avant de partager une sortie.
+--check valide sans connexion. --once lit sans publier sur MQTT ; le premier CPU/réseau local peut être null car deux observations sont nécessaires. Retirer les informations privées avant de partager une sortie.
 
 ```bash
 sudo systemctl enable --now infra-agent
@@ -102,8 +102,8 @@ systemctl is-active infra-agent
 sudo journalctl -u infra-agent -n 60 --no-pager
 ```
 
-enable active le dÃ©marrage au reboot. MQTT Discovery doit Ãªtre activÃ© dans Home Assistant. Le broker doit autoriser les publications homeassistant/sensor/infra_* et infrastructure/<agent_id>/..., et l'abonnement au statut Home Assistant. Les topics des autres appareils ne sont pas modifiÃ©s.
+enable active le démarrage au reboot. MQTT Discovery doit être activé dans Home Assistant. Le broker doit autoriser les publications homeassistant/sensor/infra_* et infrastructure/<agent_id>/..., et l'abonnement au statut Home Assistant. Les topics des autres appareils ne sont pas modifiés.
 
-AprÃ¨s modification : sudo systemctl restart infra-agent. Pour mettre Ã  jour, relancer l'installateur puis redÃ©marrer. Les configurations sont conservÃ©es.
+Après modification : sudo systemctl restart infra-agent. Pour mettre à jour, relancer l'installateur puis redémarrer. Les configurations sont conservées.
 
-Les sources en panne deviennent indisponibles. Les Ã©tats ne sont pas conservÃ©s comme mesures fraÃ®ches aprÃ¨s redÃ©marrage. mqtt.tls: true utilise la validation systÃ¨me du certificat ; adapter Ã©galement le port du broker (souvent 8883).
+Les sources en panne deviennent indisponibles. Les états ne sont pas conservés comme mesures fraîches après redémarrage. mqtt.tls: true utilise la validation système du certificat ; adapter également le port du broker (souvent 8883).

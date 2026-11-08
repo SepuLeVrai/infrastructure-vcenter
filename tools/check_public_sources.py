@@ -14,6 +14,10 @@ def check():
         if path.suffix == '.png':
             continue
         content = path.read_text(encoding='utf-8')
+        if re.search(r'[\u00c2\u00c3\ufffd]', content):
+            failures.append(f'{path.relative_to(ROOT)}: possible corrupted text encoding')
+        if re.search(r'[\u2010-\u2015\u2212\ufe58\ufe63\uff0d]', content):
+            failures.append(f'{path.relative_to(ROOT)}: use ASCII hyphens')
         # The checker contains its own private-range and personal-path patterns.
         if path.name == 'check_public_sources.py':
             continue

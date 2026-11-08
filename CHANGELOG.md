@@ -2,12 +2,12 @@
 
 ## 0.4.0
 
-- vCenter facultatif ; liste ESXi sÃ©parÃ©e par des points-virgules.
-- Filtrage vCenter ou accÃ¨s ESXi direct, identitÃ©s sÃ©parÃ©es et pannes partielles.
+- vCenter facultatif ; liste ESXi séparée par des points-virgules.
+- Filtrage vCenter ou accès ESXi direct, identités séparées et pannes partielles.
 - Reconfiguration VMware et intervalle depuis Home Assistant.
-- Linux distant par SSH avec clÃ© et vÃ©rification de clÃ© hÃ´te obligatoire.
+- Linux distant par SSH avec clé et vérification de clé hôte obligatoire.
 - Assistant de configuration Linux/MQTT.
 - Documentation et exemples fictifs, licence MIT.
-- PrÃ©sentation compacte, rattachements IPMI et puissance conservÃ©s.
+- Présentation compacte, rattachements IPMI et puissance conservés.
 
-Les nouveaux modes directs et SSH restent Ã  valider sur matÃ©riel rÃ©el.
+Les nouveaux modes directs et SSH restent à valider sur matériel réel.

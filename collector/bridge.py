@@ -27,7 +27,7 @@ def validate_config(config):
     if not config.get("sources") or any(s.get("type") not in ("linux", "ssh_linux", "ipmi") for s in config["sources"]):
         raise ValueError("At least one linux/ssh_linux/ipmi source is required")
     if not 30 <= config.get("interval", 60) <= 3600:
-        raise ValueError("Interval must be 30–3600 seconds")
+        raise ValueError("Interval must be 30-3600 seconds")
     if not config.get("mqtt", {}).get("host"):
         raise ValueError("MQTT host is required")
     for source in config["sources"]:
