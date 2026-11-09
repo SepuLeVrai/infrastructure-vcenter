@@ -1,6 +1,6 @@
 # Infrastructure vCenter
 
-Vue unifiée pour Home Assistant : VM, hyperviseurs ESXi, Linux, sondes IPMI et puissance électrique. Intégration VMware en lecture seule, carte locale sans dépendance HACS et collecteur Linux/MQTT en service système. Licence [MIT](LICENSE).
+Vue unifiée pour Home Assistant. Elle réunit les VM, hyperviseurs ESXi, Linux, sondes IPMI et mesures de puissance. Le projet fournit une intégration VMware en lecture seule, une carte de supervision et un collecteur Linux/MQTT en service système. Licence [MIT](LICENSE).
 
 ## Choisir son installation
 
@@ -18,9 +18,9 @@ Adresses fictives : `192.0.2.10` (vCenter), `192.0.2.11;192.0.2.12` (ESXi), `192
 
 ## Démarrage
 
-1. [Installer l'intégration](docs/INSTALLATION.md) et redémarrer Home Assistant.
-2. Ajouter **Infrastructure vCenter** dans les intégrations. [Paramétrage VMware](docs/VMWARE.md).
-3. Installer la ressource JavaScript et [créer la vue](dashboards/INSTALLATION-VUE.md).
+1. Installer l'intégration depuis un dépôt personnalisé dans le Marketplace ou HACS, ou copier l'archive par Samba. [Guide HAOS et mise à jour](docs/INSTALLATION.md).
+2. Pour une première installation, ajouter **Infrastructure vCenter** dans les intégrations. [Paramétrage VMware](docs/VMWARE.md).
+3. Créer la vue. Le module JavaScript est fourni avec l'intégration. [Guide de la carte](dashboards/INSTALLATION-VUE.md).
 4. Pour Linux/IPMI, installer le [collecteur Debian/MQTT](collector/README.md). MQTT fonctionne également sans intégration VMware.
 
 ## Données disponibles
@@ -35,7 +35,7 @@ Les données absentes restent inconnues. La RAM active VMware est une estimation
 
 ## État et compatibilité
 
-Version **0.4.0**, expérimentale. Le chemin vCenter 6.7, le collecteur Debian 13 local et les lectures IPMI iDRAC6 ont été utilisés sur matériel réel pendant le développement. Les nouveaux modes ESXi direct et SSH sont couverts par des tests simulés ; leur validation sur installation réelle reste à effectuer. La configuration Home Assistant complète doit également être vérifiée après installation de cette version.
+Version **0.4.1**, pour Home Assistant Core 2026.6 ou ultérieur. Le chemin vCenter 6.7, le collecteur Debian 13 local et les lectures IPMI iDRAC6 ont été utilisés sur matériel réel pendant le développement. Les modes ESXi direct et SSH sont couverts par des tests simulés. Leur validation sur installation réelle reste à effectuer. [Téléchargements](https://github.com/SepuLeVrai/infrastructure-vcenter/releases/tag/0.4.1).
 
 Les graphiques utilisent l'historique Home Assistant et se remplissent après installation. Aucun plugin graphique supplémentaire n'est nécessaire. MQTT doit être installé et intégré à Home Assistant pour le collecteur ; un broker existant convient.
 

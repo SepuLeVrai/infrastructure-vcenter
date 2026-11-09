@@ -1,8 +1,10 @@
 # Vue Infrastructure
 
-Copier www/infra-vcenter vers /config/www/infra-vcenter. Dans les ressources du tableau de bord (profil en mode avancé si nécessaire), ajouter **Module JavaScript** :
+Avec l'intégration VMware 0.4.1 et les ressources gérées dans l'interface, la ressource est déclarée au démarrage. Avec des ressources déclarées en YAML, utiliser cette URL comme **Module JavaScript** dans l'entrée existante.
 
-`/local/infra-vcenter/infrastructure-card.js?v=0.4.0`
+`/infra-vcenter/infrastructure-card.js?v=0.4.1`
+
+Pour une installation MQTT seule, copier `www/infra-vcenter` vers `/config/www/infra-vcenter` depuis l'archive interface. Déclarer le module `/local/infra-vcenter/infrastructure-card.js?v=0.4.1`.
 
 Actualiser le navigateur. Aucun plugin graphique supplémentaire requis.
 
@@ -27,7 +29,7 @@ cards:
     hours_to_show: 24
 ```
 
-Ne remplacer pas tout le tableau de bord par cet extrait.
+Pour une vue déjà configurée, conserver son YAML.
 
 ## Noms, rattachements et puissance
 

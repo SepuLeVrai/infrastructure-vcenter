@@ -1,9 +1,13 @@
 """Validate source/JSON and produce a deployment archive without dev dependencies."""
 import ast
 import json
+import hashlib
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 from public_sources import public_files
+from sync_frontend import sync
+
+sync()
 
 root = Path(__file__).resolve().parents[1]
 component = root / "custom_components" / "infra_vcenter"
@@ -49,3 +53,18 @@ with ZipFile(collector_output) as archive:
     assert archive.testzip() is None
     assert not any(name.endswith(("config.json","secrets.env")) for name in archive.namelist())
 print(f"Validated collector archive: {collector_output} ({len(collector_files)} files)")
+hacs_output = output.parent / 'infra_vcenter.zip'
+with ZipFile(hacs_output, 'w', ZIP_DEFLATED) as archive:
+    archive.write(root / 'LICENSE', 'LICENSE')
+    for path in files:
+        if component in path.parents:
+            archive.write(path, path.relative_to(component))
+with ZipFile(hacs_output) as archive:
+    assert archive.testzip() is None
+    assert 'manifest.json' in archive.namelist()
+    assert 'frontend/infrastructure-card.js' in archive.namelist()
+    assert not any(name.startswith(('custom_components/', 'www/')) for name in archive.namelist())
+print(f'Validated HACS integration archive: {hacs_output}')
+artifacts = (output, ui_output, collector_output, hacs_output)
+checksums = ''.join(f'{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.name}\n' for path in artifacts)
+(output.parent / 'SHA256SUMS').write_bytes(checksums.encode('ascii'))

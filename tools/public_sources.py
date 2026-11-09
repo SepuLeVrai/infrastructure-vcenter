@@ -3,7 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TOP_LEVEL = ('README.md', 'LICENSE', 'CHANGELOG.md', '.gitignore', '.editorconfig',
-             'requirements-dev.txt', 'package.json', 'package-lock.json')
+             'requirements-dev.txt', 'package.json', 'package-lock.json', 'hacs.json')
 FOLDERS = ('custom_components', 'www', 'collector', 'dashboards', 'docs', 'tests', 'tools', '.github')
 ALLOWED_SUFFIXES = {'.py', '.js', '.cjs', '.json', '.md', '.yaml', '.yml', '.sh', '.service', '.svg', '.png', '.example'}
 

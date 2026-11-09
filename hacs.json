@@ -1,0 +1,8 @@
+{
+  "name": "Infrastructure vCenter",
+  "homeassistant": "2026.6.0",
+  "zip_release": true,
+  "filename": "infra_vcenter.zip",
+  "hide_default_branch": true,
+  "render_readme": true
+}

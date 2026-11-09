@@ -10,6 +10,13 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from .client import AuthenticationError
 from .connection import VMwareConnection
 from .const import DEFAULT_INTERVAL, DOMAIN, PLATFORMS
+from .frontend import async_setup_frontend
+
+
+async def async_setup(hass: HomeAssistant, config) -> bool:
+    """Serve the bundled card and maintain its resource URL only."""
+    await async_setup_frontend(hass)
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:

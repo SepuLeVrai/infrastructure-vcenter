@@ -1,6 +1,6 @@
 {
   "name": "infrastructure-vcenter",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "license": "MIT",
   "description": "Development tests for the local Home Assistant infrastructure card",

@@ -1,4 +1,4 @@
-/* Infrastructure vCenter 0.4.0 - local Lovelace card, no external dependencies. */
+/* Infrastructure vCenter 0.4.1 - local Lovelace card, no external dependencies. */
 (() => {
   const TAG = "infra-vcenter-overview";
   const TEXT = { poweredOn: "Allumée", poweredOff: "Éteinte", suspended: "Suspendue",
